@@ -5,6 +5,7 @@ import Messages from "./dbMessages.js";
 import Pusher from "pusher";
 import cors from "cors";
 
+require('dotenv').config()
 
 //app config
 const app = express();
@@ -12,7 +13,7 @@ const port = process.env.PORT || 9000;
 
 const pusher = new Pusher({
   appId: "1185075",
-  key: "86a92e3324d0040be2d5",
+  key: process.env.API_KEY,
   secret: "0fb2d34721c5773b028b",
   cluster: "ap2",
   useTLS: true,
@@ -31,8 +32,7 @@ app.use(cors());
 // });
 
 //DB config
-const connection_url =
-  "mongodb+srv://admin:Pu833dU7RcdCKvGW@cluster0.czyfv.mongodb.net/chitchatdb?retryWrites=true&w=majority";
+const connection_url = process.env.MONGODB_URI;
 
 mongoose.connect(connection_url, {
   useCreateIndex: true,
